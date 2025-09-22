@@ -1,13 +1,23 @@
-import { Table } from "antd";
+import CustomTable from "../../../components/comman/CustomTable";
 
 const UsersTable = ({ data }) => {
+    const usersColumns = [
+        { title: "FirstName", dataIndex: "firstName" },
+        { title: "LastName", dataIndex: "lastName" },
+        { title: "Email", dataIndex: "email" },
+        { title: "Phone", dataIndex: "phone" },
+    ];
+
     return (
-        <Table dataSource={data} rowKey="id">
-            <Table.Column title="FirstName" dataIndex="firstName" />
-            <Table.Column title="LastName" dataIndex="lastName" />
-            <Table.Column title="Email" dataIndex="email" />
-            <Table.Column title="Phone" dataIndex="phone" />
-        </Table>
+        <CustomTable
+            data={data}
+            rowKey="id"
+            columns={usersColumns}
+            pagination={["topRight"]}
+            isRowSelectionEnabled={true}
+        >
+
+        </CustomTable>
     );
 };
 
