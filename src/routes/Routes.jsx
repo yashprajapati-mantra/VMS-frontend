@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
+import ForgotPassword from '../pages/auth/ForgotPassword';
 
 const Router = createBrowserRouter([
   { path: '/', element: <Login /> },
+  { path: '/forgotpassword', element: <ForgotPassword /> },
   { path: '/dashboard', element: <Dashboard /> },
   {
     path: '*',
