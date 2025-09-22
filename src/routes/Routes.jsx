@@ -1,12 +1,29 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Login from '../pages/auth/Login';
-import Dashboard from '../pages/dashboard/Dashboard';
+import { createBrowserRouter } from "react-router-dom";
+import Login from "../pages/auth/Login";
+import DashboardLayout from "../pages/dashboard/DashboardLayout";
+
+// Dashboard child pages
+import Cameras from "../pages/dashboard/Cameras/Cameras";
+import Users from "../pages/dashboard/Users/Users";
+import Dashboard from "../pages/dashboard/Dashboard";
+
 
 const Router = createBrowserRouter([
-  { path: '/', element: <Login /> },
-  { path: '/dashboard', element: <Dashboard /> },
   {
-    path: '*',
+    path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      { index: true, element: <Dashboard /> }, // default page when visiting /dashboard
+      { path: "users", element: <Users /> },
+      { path: "cameras", element: <Cameras /> },
+    ],
+  },
+  {
+    path: "*",
     element: (
       <div className="flex items-center justify-center h-screen">
         <h1 className="text-2xl font-bold text-red-600">404 - Page Not Found</h1>
