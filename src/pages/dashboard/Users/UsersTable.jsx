@@ -1,6 +1,6 @@
-import { Button, Input, Select, Space, Table, Pagination, Switch } from "antd";
+import { Button, Input, Select, Space, Pagination, Switch } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import CustomTable from "../../../components/comman/CustomTable";
 import { permissionData } from "../../../constants";
 const { Search } = Input;
@@ -10,12 +10,14 @@ const UsersTable = ({ data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
-    const usersColumns = [
+    // Memoize columns for performance
+    const usersColumns = useMemo(() => [
         {
             title: "Full Name",
             key: "fullname",
             render: (_, record) => `${record.firstName} ${record.lastName}`,
-        }, { title: "Username", dataIndex: "username" },
+        },
+        { title: "Username", dataIndex: "username" },
         { title: "Email", dataIndex: "email" },
         { title: "Role", dataIndex: "role" },
         {
@@ -52,11 +54,12 @@ const UsersTable = ({ data }) => {
                 </Space>
             ),
         },
-    ];
+    ], []);
 
-    const paginatedData = data.slice(
-        (currentPage - 1) * pageSize,
-        currentPage * pageSize
+    // Memoize paginated data for performance
+    const paginatedData = useMemo(() =>
+        data.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+        [data, currentPage, pageSize]
     );
 
     return (
@@ -76,16 +79,14 @@ const UsersTable = ({ data }) => {
                     </Select>
                     <Select placeholder="Role" className="w-40">
                         {/* Dynamically populate roles if needed */}
-                        {permissionData.map((role) => {
-                            return <Select.Option key={role.key} value={role.role}>{role.label}</Select.Option>
-                        })}
+                        {permissionData.map((role) => (
+                            <Select.Option key={role.key} value={role.key}>{role.label}</Select.Option>
+                        ))}
                     </Select>
-
-                    {/* Custom Pagination Control */}
                     <Pagination
                         current={currentPage}
                         pageSize={pageSize}
-                        total={data.length} // total data length
+                        total={data.length}
                         onChange={(page, size) => {
                             setCurrentPage(page);
                             setPageSize(size);
@@ -93,10 +94,8 @@ const UsersTable = ({ data }) => {
                         showSizeChanger
                         size="small"
                     />
-
                 </div>
             </div>
-
             {/* --- Table --- */}
             <CustomTable
                 data={paginatedData}
@@ -104,10 +103,7 @@ const UsersTable = ({ data }) => {
                 columns={usersColumns}
                 pagination={false}
                 isRowSelectionEnabled={true}
-            >
-            </CustomTable>
-
-
+            />
         </div>
     );
 };
