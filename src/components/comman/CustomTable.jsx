@@ -21,24 +21,21 @@ const CustomTable = ({ columns, data, rowKey = "id", pagination = ["topRight"], 
         selectedRowKeys,
         onChange: onSelectChange,
         selections: [
-            Table.SELECTION_ALL,
-            Table.SELECTION_INVERT,
-            Table.SELECTION_NONE,
             {
-                key: "odd",
-                text: "Select Odd Row",
-                onSelect: (changableRowKeys) => {
-                    let newSelectedRowKeys = changableRowKeys.filter((_, index) => index % 2 === 0);
-                    setSelectedRowKeys(newSelectedRowKeys);
-                },
+                key: "select-current-page",
+                text: "Select Current page",
+                // onSelect: (changableRowKeys) => {
+                //     let newSelectedRowKeys = changableRowKeys.filter((_, index) => index % 2 === 0);
+                //     setSelectedRowKeys(newSelectedRowKeys);
+                // },
             },
             {
-                key: "even",
-                text: "Select Even Row",
-                onSelect: (changableRowKeys) => {
-                    let newSelectedRowKeys = changableRowKeys.filter((_, index) => index % 2 !== 0);
-                    setSelectedRowKeys(newSelectedRowKeys);
-                },
+                key: "select-all-page",
+                text: "Select all page",
+                // onSelect: (changableRowKeys) => {
+                //     let newSelectedRowKeys = changableRowKeys.filter((_, index) => index % 2 !== 0);
+                //     setSelectedRowKeys(newSelectedRowKeys);
+                // },
             },
         ],
     };
@@ -46,11 +43,11 @@ const CustomTable = ({ columns, data, rowKey = "id", pagination = ["topRight"], 
 
     return (
         <Table
-            rowSelection={isRowSelectionEnabled ?? rowSelection}
+            rowSelection={isRowSelectionEnabled && rowSelection}
             columns={columns}
             dataSource={data}
             rowKey={rowKey}
-            pagination={{ position: pagination }}
+            pagination={pagination ? { position: pagination } : false}
         />
     );
 };

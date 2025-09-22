@@ -1,7 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../pages/auth/Login";
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
-
 // Dashboard child pages
 import Cameras from "../pages/dashboard/Cameras/Cameras";
 import Users from "../pages/dashboard/Users/Users";
@@ -11,7 +9,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <>Welcome To Login page</>,
   },
   {
     path: "/dashboard",

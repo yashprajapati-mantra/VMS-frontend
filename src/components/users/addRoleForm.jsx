@@ -1,25 +1,13 @@
 import { Button, Form, Input, Tabs, Table, Checkbox } from "antd";
 import CustomDrawer from "../comman/CustomDrawer";
 import { useState } from "react";
+import { permissionData } from "../../constants";
 
 const { TabPane } = Tabs;
 
 const AddRoleForm = ({ open, onClose }) => {
     const [form] = Form.useForm();
     const [permissions, setPermissions] = useState({});
-
-    // Permissions Data
-    const permissionData = [
-        { key: "cameras", label: "Cameras" },
-        { key: "liveStreams", label: "Live Streams" },
-        { key: "configureCamera", label: "Configure Camera Settings" },
-        { key: "diskMonitoring", label: "Disk Monitoring" },
-        { key: "playRecording", label: "Play Recording" },
-        { key: "downloadRecording", label: "Download Recording" },
-        { key: "user", label: "User" },
-        { key: "rolesPermissions", label: "Roles and Permissions" },
-        { key: "enrollUser", label: "Enroll User" },
-    ];
 
     // Table Columns with Dynamic Checkbox
     const columns = [
