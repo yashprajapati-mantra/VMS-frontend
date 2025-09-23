@@ -4,7 +4,8 @@ import Logo from "@/assets/images/Logo.png";
 import { monitorNavbarItems, navbarItems, roleItems } from "../../constants";
 import { useNavbarStore } from "../../store/navbarStore";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { DownOutlined } from "@ant-design/icons";
 
 export default function HeaderBar() {
     const setIsActive = useNavbarStore((state) => state.setIsActive);
@@ -17,6 +18,12 @@ export default function HeaderBar() {
     const currentMenuItems =
         selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
 
+
+    useEffect(() => {
+        localStorage.setItem("selectedRole", selectedRole);
+        navigate("/dashboard"); // Redirect to dashboard on role change
+    }, [selectedRole])
+
     return (
         <Header
             style={{
@@ -28,14 +35,8 @@ export default function HeaderBar() {
                 padding: "0px"
             }}
         >
-            <div className="demo-logo flex items-center gap-4">
-                <p className="text-lg font-semibold">
-                    <img src={Logo} alt="Logo" />
-                </p>
-                {/* <Dropdown menu={{ items: roleItems }} placement="bottomLeft" arrow>
-                    <Button className="!py-6">Manage</Button>
-                </Dropdown> */}
-
+            <div className="demo-logo flex !items-center h-full gap-4">
+                <img src={Logo} alt="Logo" />
                 <Dropdown
                     menu={{
                         items: roleItems.map((role) => ({
@@ -47,8 +48,12 @@ export default function HeaderBar() {
                     placement="bottomLeft"
                     arrow
                 >
-                    <Button className="!py-6">
-                        {roleItems.find((r) => r.key === selectedRole)?.label || "Select"}
+                    <Button
+                        type="button"
+                        className={`secondary_btn !h-12`}
+
+                    >
+                        {roleItems.find((r) => r.key === selectedRole)?.label || "Select"}  <DownOutlined />
                     </Button>
                 </Dropdown>
             </div>
@@ -58,7 +63,10 @@ export default function HeaderBar() {
                     return (
                         <Button
                             key={item.key}
-                            className={`!py-6 ${activeClass}`}
+                            type="button"
+                            size="large"
+                            variant="outlined"
+                            className={`${activeClass ? 'primary_btn' : 'secondary_btn'} !h-12`}
                             onClick={() => {
                                 setIsActive(item.key);
                                 if (item.route) navigate(item.route);

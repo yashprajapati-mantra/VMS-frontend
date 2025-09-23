@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-// import pages and layouts
+// import pages
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import Login from '../pages/auth/Login';
@@ -21,6 +21,9 @@ const Router = createBrowserRouter([
       { index: true, element: <Dashboard /> }, // default page when visiting /dashboard
       { path: "users", element: <Users /> },
       { path: "cameras", element: <Cameras /> },
+      { path: "enroll", element: <Cameras /> },
+      { path: "system-settings", element: <Cameras /> },
+      { path: "ai-model", element: <Cameras /> },
     ],
   },
   {

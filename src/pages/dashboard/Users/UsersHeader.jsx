@@ -11,15 +11,18 @@ const UsersHeader = ({ selectedTab, setSelectedTab, onAddClick }) => {
                 value={selectedTab}
                 onChange={setSelectedTab}
                 options={TabOptions}
-                style={{ marginBottom: 8 }}
+                size="large"
+                style={{ marginBottom: 8, fontSize: 14 }}
             />
 
             <div className="flex gap-3">
                 <Button
-                    type="primary"
+                    type="button"
                     icon={<PlusOutlined />}
                     onClick={onAddClick}
-                    className="rounded-xl"
+                    size="large"
+                    className="primary_btn"
+
                 >
                     {selectedTab === "appUser" ? "Add App User" : "Add Role"}
                 </Button>
