@@ -84,8 +84,8 @@ const AddRoleForm = ({ open, onClose }) => {
                         />
 
                         <div className="flex justify-end gap-3 mt-4">
-                            <Button onClick={onClose}>Cancel</Button>
-                            <Button type="primary" htmlType="submit">
+                            <Button onClick={onClose} type="button" size="large" className="secondary_btn">Cancel</Button>
+                            <Button type="button" size="large" htmlType="submit" className="primary_btn">
                                 Create Role
                             </Button>
                         </div>

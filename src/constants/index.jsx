@@ -13,8 +13,8 @@ export const navbarItems = [
     { key: "enroll", label: "Enroll", route: "enroll" },
     { key: "systemSettings", label: "System Settings", route: "system-settings" },
     { key: "AImodel", label: "AI Model", route: "ai-model" },
-    { key: "notifications", icon: <BellOutlined /> },
-    { key: "profiles", icon: <UserOutlined /> },
+    { key: "notifications", icon: <BellOutlined className="text-lg" /> },
+    { key: "profiles", icon: <UserOutlined className="text-lg" /> },
 ];
 
 export const monitorNavbarItems = [
@@ -33,8 +33,8 @@ export const roleItems = [
 ];
 
 export const TabOptions = [
-    { label: "App User", value: "appUser" },
-    { label: "Roles and Permissions", value: "rolesAndPermissions" },
+    { label: <div className="font-body">App User</div>, value: "appUser" },
+    { label: <div className="font-body">Roles and Permissions</div>, value: "rolesAndPermissions" },
 ];
 
 export const permissionData = [

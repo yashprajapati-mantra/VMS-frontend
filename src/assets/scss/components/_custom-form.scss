@@ -1,35 +1,67 @@
 @use "../abstract/variables" as *;
-.form_control{
+
+.form_control {
     border: 1px solid $primary-14;
     color: $black-100;
+
     &:hover,
     &:focus,
     &:active,
     &:focus:active,
-    &:focus-within
-    {
+    &:focus-within {
         border-color: $primary-100;
     }
 }
 
-.ant-btn{
+.ant-btn {
 
-    &.primary_btn{
+    &.primary_btn {
         background: $primary;
         color: $white;
         font-size: $fs-14;
         font-weight: 500;
         border-radius: 0.5rem;
         transition: 0.3s all;
+        padding: 2.5rem 1.5rem;
+
         &:disabled,
-        &.disabled{
+        &.disabled {
             opacity: 0.5;
         }
+
         &:hover,
         &:focus,
         &:active,
-        &:focus:active{
+        &:focus:active {
             background: $primary-100;
         }
     }
+
+    &.secondary_btn {
+        background: $secondary;
+        color: $black;
+        font-size: $fs-14;
+        font-weight: 500;
+        border-color: $black-200;
+        border-radius: 0.5rem;
+        transition: 0.3s all;
+
+        &:disabled,
+        &.disabled {
+            opacity: 0.5;
+        }
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:focus:active {
+            background-color: $secondary;
+            border-color: $black-500;
+        }
+    }
+}
+
+.font-body {
+    font-size: $fs-14;
+    font-weight: 500;
 }

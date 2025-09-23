@@ -17,7 +17,7 @@ const DashboardLayout = () => {
       </Content>
 
       <Footer style={{ textAlign: "center" }}>
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        VMS System ©{new Date().getFullYear()} Created by Mantra
       </Footer>
     </Layout>
   );
