@@ -57,7 +57,15 @@ const ForgotPassword = () => {
               <Input placeholder="Enter your email" size="large" onChange={(e) => handleEmailChange(e.target.value)} />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit" loading={isLoading} disabled={isButtonDisabled} block>
+            <Button
+              type="buttons"
+              size="large"
+              className="primary_btn"
+              htmlType="submit"
+              loading={isLoading}
+              disabled={isButtonDisabled}
+              block
+            >
               Send OTP
             </Button>
           </Form>
@@ -98,7 +106,15 @@ const ForgotPassword = () => {
                 Resend OTP?
               </a>
             </div>
-            <Button type="primary" htmlType="submit" loading={isLoading} disabled={isButtonDisabled} block>
+            <Button
+              type="buttons"
+              size="large"
+              className="primary_btn"
+              htmlType="submit"
+              loading={isLoading}
+              disabled={isButtonDisabled}
+              block
+            >
               Verify OTP
             </Button>
           </Form>
@@ -186,7 +202,14 @@ const ForgotPassword = () => {
               <Input.Password placeholder="Confirm new password" size="large" />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit" loading={isLoading} block>
+            <Button
+              type="buttons"
+              size="large"
+              className="primary_btn"
+              htmlType="submit"
+              loading={isLoading}
+              block
+            >
               Update Password
             </Button>
           </Form>
@@ -202,7 +225,12 @@ const ForgotPassword = () => {
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             Password changed successfully
           </h2>
-          <Button type="primary" onClick={() => navigate("/")}>
+          <Button
+            type="buttons"
+            size="large"
+            className="primary_btn"
+            onClick={() => navigate("/")}
+          >
             Back to login
           </Button>
         </div>
@@ -215,7 +243,12 @@ const ForgotPassword = () => {
             <PasswordErrorSvg />
           </div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Unexpected error occurred</h2>
-          <Button type="primary" onClick={() => setStep('email')}>
+          <Button
+            type="buttons"
+            size="large"
+            className="primary_btn"
+            onClick={() => setStep('email')}
+          >
             Try Again
           </Button>
         </div>

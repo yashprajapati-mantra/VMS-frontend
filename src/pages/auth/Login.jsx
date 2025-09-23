@@ -88,6 +88,7 @@ const Login = () => {
             type="buttons"
             size="large"
             className="primary_btn"
+            htmlType="submit"
             loading={isLoading}
             block
           >
