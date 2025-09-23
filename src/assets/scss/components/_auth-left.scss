@@ -1,0 +1,17 @@
+@use "../abstract/variables" as *;
+
+.login-container {
+    background: $white;
+    overflow: hidden;
+    height: 100vh;
+    .login-image {
+        width: max-content;
+        padding-left: 1rem;
+      img {
+          filter: brightness(0.9);
+          height: 100vh;
+          padding: 1rem 0;
+          width: 100%;
+      }
+    }
+}

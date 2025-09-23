@@ -1,16 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
+// import pages and layouts
 import DashboardLayout from "../pages/dashboard/DashboardLayout";
-// Dashboard child pages
+import ForgotPassword from '../pages/auth/ForgotPassword';
+import Login from '../pages/auth/Login';
 import Cameras from "../pages/dashboard/Cameras/Cameras";
-import Users from "../pages/dashboard/Users/Users";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Users from "../pages/dashboard/Users/Users";
 
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <>Welcome To Login page</>,
+    element: <Login />,
   },
+  { path: '/forgotpassword', element: <ForgotPassword /> },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
