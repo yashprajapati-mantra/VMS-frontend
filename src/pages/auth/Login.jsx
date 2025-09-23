@@ -85,9 +85,10 @@ const Login = () => {
         {/* Submit */}
         <Form.Item>
           <Button
-            type="primary"
+            type="buttons"
+            size="large"
+            className="primary_btn"
             htmlType="submit"
-            className="flex items-center justify-center gap-2 !bg-[#3B3C97] !border-[#3B3C97] text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:!bg-[#2f3078] hover:!border-[#2f3078] transition-all"
             loading={isLoading}
             block
           >
