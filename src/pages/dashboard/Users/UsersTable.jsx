@@ -8,7 +8,7 @@ import { permissionData } from "../../../constants";
 const { Search } = Input;
 
 const UsersTable = ({ data }) => {
-    const [search, setSearch] = useState("");
+    // const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [isDrawerOpen, setDrawerOpen] = useState(false);
