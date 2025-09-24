@@ -1,12 +1,11 @@
-import Logo from "@/assets/images/Logo.png";
-import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Logo from "@/assets/images/Logo.png";
 import { monitorNavbarItems, navbarItems, roleItems } from "../../constants";
 import { useNavbarStore } from "../../store/navbarStore";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { DownOutlined } from "@ant-design/icons";
 
 export default function HeaderBar() {
     const setIsActive = useNavbarStore((state) => state.setIsActive);
@@ -14,17 +13,20 @@ export default function HeaderBar() {
     const navigate = useNavigate();
 
     // Track current selected role
-    const [selectedRole, setSelectedRole] = useState(localStorage.getItem("selectedRole") || roleItems[0].key); // default first item
-
-    // Dynamically pick menu items based on role
-    const currentMenuItems =
-        selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
+    const [selectedRole, setSelectedRole] = useState(roleItems[0].key); // default first item
+    // Dynamically pick menu items based on role, memoized
+    const currentMenuItems = useMemo(() => {
+        return selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
+    }, [selectedRole]);
 
 
     useEffect(() => {
-        localStorage.setItem("selectedRole", selectedRole);
-        navigate("/dashboard"); // Redirect to dashboard on role change
-    }, [selectedRole])
+        const prevRole = localStorage.getItem("selectedRole");
+        if (prevRole !== selectedRole) {
+            localStorage.setItem("selectedRole", selectedRole);
+            navigate("/dashboard"); // Redirect to dashboard on role change
+        }
+    }, [selectedRole, navigate]);
 
     return (
         <Header
@@ -44,9 +46,7 @@ export default function HeaderBar() {
                         items: roleItems.map((role) => ({
                             key: role.key,
                             label: role.label,
-                            onClick: () => {
-                                setSelectedRole(role.key);
-                            }
+                            onClick: () => setSelectedRole(role.key)
                         }))
                     }}
                     placement="bottomLeft"
@@ -60,7 +60,7 @@ export default function HeaderBar() {
                         {roleItems.find((r) => r.key === selectedRole)?.label || "Select"}  <DownOutlined />
                     </Button>
                 </Dropdown>
-            </div >
+            </div>
             <div className="flex items-center gap-4">
                 {currentMenuItems.map((item) => {
                     const activeClass = isActive === item.key ? "!bg-blue-500 !text-white" : "";
@@ -81,6 +81,6 @@ export default function HeaderBar() {
                     );
                 })}
             </div>
-        </Header >
+        </Header>
     );
 }

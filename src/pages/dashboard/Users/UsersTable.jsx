@@ -1,8 +1,9 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, FunnelPlotOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Pagination, Select, Space, Switch } from "antd";
 import { useMemo, useState } from "react";
 import EmptyBox from "../../../assets/svg/EmptyBox";
 import CustomTable from "../../../components/comman/CustomTable";
+import FilterForm from "../../../components/users/FilterForm";
 import { permissionData } from "../../../constants";
 const { Search } = Input;
 
@@ -10,6 +11,7 @@ const UsersTable = ({ data }) => {
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
 
     // Memoize columns for performance
     const usersColumns = useMemo(() => [
@@ -74,23 +76,25 @@ const UsersTable = ({ data }) => {
         <div className="flex flex-col gap-4 mx-2">
             {/* --- Top Row: Search + Filters + Pagination --- */}
             <div className="flex items-center justify-between">
-                <Search
+                <Input
+                    prefix={<SearchOutlined style={{ color: "#8C98A4" }} />}
                     placeholder="Search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="!w-64"
+                    className="rounded-full border border-gray-200 px-4 py-2 text-gray-500 bg-white focus:shadow-none focus:border-blue-300 !w-64 !h-10"
                 />
                 <div className="flex items-center gap-3">
-                    <Select placeholder="Date added" className="w-40">
+                    <Select placeholder="Date added" className="!w-40 !h-10">
                         <Select.Option value="recent">Recently Added</Select.Option>
                         <Select.Option value="oldest">Oldest</Select.Option>
                     </Select>
-                    <Select placeholder="Role" className="w-40">
+                    <Select placeholder="Role" className="!w-40 !h-10">
                         {/* Dynamically populate roles if needed */}
                         {permissionData.map((role) => (
                             <Select.Option key={role.key} value={role.key}>{role.label}</Select.Option>
                         ))}
                     </Select>
+                    <Button className="!w-10 !h-10" icon={<FunnelPlotOutlined className="!text-lg" />} onClick={() => setDrawerOpen(true)} />
+                    {isDrawerOpen && <FilterForm open={isDrawerOpen} onClose={() => setDrawerOpen(false)} />
+                    }
                     <Pagination
                         current={currentPage}
                         pageSize={pageSize}
@@ -100,7 +104,7 @@ const UsersTable = ({ data }) => {
                             setPageSize(size);
                         }}
                         showSizeChanger
-                        size="small"
+                        size="large"
                     />
                 </div>
             </div>

@@ -23,8 +23,8 @@ export const monitorNavbarItems = [
     { key: "recordings", label: "Recordings", route: "/monitor/recordings" },
     { key: "events", label: "Events", route: "/monitor/events" },
     { key: "reports", label: "Reports", route: "/monitor/reports" },
-    { key: "notifications", icon: <BellOutlined /> },
-    { key: "profiles", icon: <UserOutlined /> },
+    { key: "notifications", icon: <BellOutlined className="text-lg" /> },
+    { key: "profiles", icon: <UserOutlined className="text-lg" /> },
 ];
 
 export const roleItems = [

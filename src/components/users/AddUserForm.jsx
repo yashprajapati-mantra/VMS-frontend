@@ -71,7 +71,7 @@ const AddUserForm = ({ open, onClose }) => {
                             <Switch />
                         </Form.Item>
 
-                        <div className="flex justify-end gap-3">
+                        <div className="flex fixed bottom-10 right-6 justify-end gap-3">
                             <Button onClick={onClose} type="button" size="large" className="secondary_btn">Cancel</Button>
                             <Button type="button" htmlType="submit" size="large" className="primary_btn">
                                 Add User

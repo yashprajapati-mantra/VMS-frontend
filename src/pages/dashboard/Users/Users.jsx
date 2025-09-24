@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import AddRoleForm from "../../../components/users/addRoleForm";
-import AddUserForm from "../../../components/users/addUserForm";
+import AddRoleForm from "../../../components/users/AddRoleForm";
+import AddUserForm from "../../../components/users/AddUserForm";
 import { TabOptions } from "../../../constants";
 import { useRolesAndPermissionsQuery } from "../../../queries/useRolesAndPermissionsQuery";
 import { useUsersQuery } from "../../../queries/useUsersQuery";

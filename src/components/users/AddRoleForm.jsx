@@ -83,7 +83,7 @@ const AddRoleForm = ({ open, onClose }) => {
                             scroll={{ x: true }}
                         />
 
-                        <div className="flex justify-end gap-3 mt-4">
+                        <div className="flex fixed bottom-10 right-6 justify-end gap-3 mt-4">
                             <Button onClick={onClose} type="button" size="large" className="secondary_btn">Cancel</Button>
                             <Button type="button" size="large" htmlType="submit" className="primary_btn">
                                 Create Role
