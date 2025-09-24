@@ -1,19 +1,18 @@
+import Logo from "@/assets/images/Logo.png";
+import { DownOutlined } from "@ant-design/icons";
 import { Button, Dropdown } from "antd";
 import { Header } from "antd/es/layout/layout";
-import Logo from "@/assets/images/Logo.png";
-import { monitorNavbarItems, navbarItems, roleItems } from "../../constants";
-import { useNavbarStore } from "../../store/navbarStore";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useMemo } from "react";
-import { DownOutlined } from "@ant-design/icons";
+import { monitorNavbarItems, navbarItems, roleItems } from "../../constants";
 
 export default function HeaderBar() {
-    const setIsActive = useNavbarStore((state) => state.setIsActive);
-    const isActive = useNavbarStore((state) => state.isActive);
+    const [isActiveTab, setIsActiveTab] = useState(localStorage.getItem("isActiveTab") || 'dashboard')
     const navigate = useNavigate();
 
     // Track current selected role
-    const [selectedRole, setSelectedRole] = useState(roleItems[0].key); // default first item
+    const [selectedRole, setSelectedRole] = useState(roleItems[0].key);
+
     // Dynamically pick menu items based on role, memoized
     const currentMenuItems = useMemo(() => {
         return selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
@@ -26,6 +25,7 @@ export default function HeaderBar() {
             localStorage.setItem("selectedRole", selectedRole);
             navigate("/dashboard"); // Redirect to dashboard on role change
         }
+
     }, [selectedRole, navigate]);
 
     return (
@@ -63,7 +63,7 @@ export default function HeaderBar() {
             </div>
             <div className="flex items-center gap-4">
                 {currentMenuItems.map((item) => {
-                    const activeClass = isActive === item.key ? "!bg-blue-500 !text-white" : "";
+                    const activeClass = isActiveTab === item.key ? "!bg-blue-500 !text-white" : "";
                     return (
                         <Button
                             key={item.key}
@@ -72,7 +72,8 @@ export default function HeaderBar() {
                             variant="outlined"
                             className={`${activeClass ? 'primary_btn' : 'secondary_btn'} !h-12`}
                             onClick={() => {
-                                setIsActive(item.key);
+                                setIsActiveTab(item.key);
+                                localStorage.setItem("isActiveTab", item.key);
                                 if (item.route) navigate(item.route);
                             }}
                         >
@@ -80,6 +81,21 @@ export default function HeaderBar() {
                         </Button>
                     );
                 })}
+                {/* 
+                <Menu
+                    mode="horizontal"
+                    selectedKeys={[location.pathname]}
+                    items={currentMenuItems}
+                    onClick={({ key }) => navigate(key)}
+                    style={{
+                        border: "none",
+                        display: "flex",
+                        gap: "8px",
+                        background: "transparent",
+
+                    }}
+                    className="hover:border-0 !flex !gap-2 [&_.ant-menu-item]:!rounded-xl [&_.ant-menu-item-selected]:!bg-indigo-600 [&_.ant-menu-item-selected]:!text-white"
+                /> */}
             </div>
         </Header>
     );
