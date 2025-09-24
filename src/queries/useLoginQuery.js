@@ -1,11 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
-import { message, notification } from "antd";
 import React from "react";
 import axios from "axios";
 
 import { useAuthStore } from "../store/authStore";
 import { API_ROUTES } from "../api/apiConfig";
-
+import { useNotify } from "../components/comman/NotificationProvider";
 
 const loginApi = async ({ username, password }) => {
     const response = await axios.post(`${API_ROUTES.AUTH.LOGIN}`, { username, password });
@@ -13,10 +12,9 @@ const loginApi = async ({ username, password }) => {
 };
 
 
-// Custom hook to provide notification contextHolder and login mutation
 export const useLoginMutation = () => {
     const { setUser } = useAuthStore();
-    const [api, contextHolder] = notification.useNotification();
+    const { openNotificationWithIcon } = useNotify();
 
     const mutation = useMutation({
         mutationFn: loginApi,
@@ -25,22 +23,12 @@ export const useLoginMutation = () => {
             if (data.token) {
                 document.cookie = `token=${data.token};`;
             }
-            message.success("Login successful!");
-            api.success({
-                message: "Login Successful",
-                description: `Welcome, ${data.user.username}!`,
-                duration: 3,
-            });
+            openNotificationWithIcon("success", "Login Successful", `Welcome, ${data.user.username}!`);
         },
         onError: (error) => {
-            message.error(error.message || "Login failed");
-            api.error({
-                message: "Login Failed",
-                description: error.response.data.error || "Invalid credentials",
-                duration: 3,
-            });
+            openNotificationWithIcon("error", "Login Failed", error.message || "Login failed");
         },
     });
 
-    return { ...mutation, contextHolder };
+    return { ...mutation };
 };

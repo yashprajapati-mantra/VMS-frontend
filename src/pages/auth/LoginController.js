@@ -4,7 +4,7 @@ import { useAuthStore } from "../../store/authStore";
 
 export function useLoginController() {
   const { user, logout } = useAuthStore();
-  const { contextHolder, ...loginMutation } = useLoginMutation();
+  const loginMutation = useLoginMutation();
 
   const onFinish = (values) => {
     loginMutation.mutate(values);
@@ -15,6 +15,5 @@ export function useLoginController() {
     isLoading: loginMutation.isLoading,
     onFinish,
     logout,
-    contextHolder,
   };
 }
