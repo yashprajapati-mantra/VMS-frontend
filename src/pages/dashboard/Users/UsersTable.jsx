@@ -1,6 +1,7 @@
-import { Button, Input, Select, Space, Pagination, Switch } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Input, Pagination, Select, Space, Switch } from "antd";
 import { useMemo, useState } from "react";
+import EmptyBox from "../../../assets/svg/EmptyBox";
 import CustomTable from "../../../components/comman/CustomTable";
 import { permissionData } from "../../../constants";
 const { Search } = Input;
@@ -19,7 +20,7 @@ const UsersTable = ({ data }) => {
         },
         { title: "Username", dataIndex: "username" },
         { title: "Email", dataIndex: "email" },
-        { title: "Role", dataIndex: "role" },
+        { title: "Role", dataIndex: "roles" },
         {
             title: "2FA", dataIndex: "twoFactorAuth",
             render: (enabled, record) => (
@@ -58,10 +59,17 @@ const UsersTable = ({ data }) => {
 
     // Memoize paginated data for performance
     const paginatedData = useMemo(() =>
-        data.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+        data?.slice((currentPage - 1) * pageSize, currentPage * pageSize),
         [data, currentPage, pageSize]
     );
 
+    if (paginatedData.length === 0) {
+        return (
+            <div className="flex justify-center items-center min-h-[60vh]">
+                <EmptyBox />
+            </div>
+        );
+    }
     return (
         <div className="flex flex-col gap-4 mx-2">
             {/* --- Top Row: Search + Filters + Pagination --- */}

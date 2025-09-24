@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
+import AddRoleForm from "../../../components/users/addRoleForm";
+import AddUserForm from "../../../components/users/addUserForm";
 import { TabOptions } from "../../../constants";
-import { useUsersQuery } from "../../../queries/useUsersQuery";
 import { useRolesAndPermissionsQuery } from "../../../queries/useRolesAndPermissionsQuery";
+import { useUsersQuery } from "../../../queries/useUsersQuery";
 import { useUserStore } from "../../../store/usersStore";
+import RolesTable from "./RolesTable";
 import UsersHeader from "./UsersHeader";
 import UsersTable from "./UsersTable";
-import RolesTable from "./RolesTable";
-import AddUserForm from "../../../components/users/addUserForm";
-import AddRoleForm from "../../../components/users/addRoleForm";
 
 const Users = () => {
     const [selectedTab, setSelectedTab] = useState(TabOptions[0].value);
     const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-    const { data: usersRes, isLoading, error } = useUsersQuery();
+    const { data: usersRes, isLoading: userLoading, error: userError } = useUsersQuery();
     const { data: rolesRes, isLoading: rolesLoading, error: rolesError } =
         useRolesAndPermissionsQuery();
 
@@ -21,14 +21,16 @@ const Users = () => {
     const users = useUserStore((state) => state.users);
 
     useEffect(() => {
-        if (usersRes) setUsers(usersRes.users);
+        if (usersRes) setUsers(usersRes);
     }, [usersRes, setUsers]);
 
 
 
-    if (isLoading || rolesLoading) return <div>Loading...</div>;
+    if (userLoading || rolesLoading) return <div>Loading...</div>;
 
-    if (error || rolesError) return <div>Error loading data</div>;
+    if (userError || rolesError) return <div>Error loading data</div>;
+
+
 
     return (
         <>

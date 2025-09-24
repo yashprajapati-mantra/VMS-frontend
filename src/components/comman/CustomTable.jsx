@@ -13,7 +13,6 @@ const CustomTable = ({ columns, data, rowKey = "id", pagination = ["topRight"], 
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const onSelectChange = (newSelectedRowKeys) => {
-        console.log('selectedRowKeys changed: ', newSelectedRowKeys);
         setSelectedRowKeys(newSelectedRowKeys);
     };
 
