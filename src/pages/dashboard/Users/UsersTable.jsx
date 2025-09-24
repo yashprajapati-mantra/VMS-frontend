@@ -1,0 +1,123 @@
+import { DeleteOutlined, EditOutlined, FunnelPlotOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Input, Pagination, Select, Space, Switch } from "antd";
+import { useMemo, useState } from "react";
+import EmptyBox from "../../../assets/svg/EmptyBox";
+import CustomTable from "../../../components/comman/CustomTable";
+import FilterForm from "../../../components/users/FilterForm";
+import { permissionData } from "../../../constants";
+const { Search } = Input;
+
+const UsersTable = ({ data }) => {
+    const [search, setSearch] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
+
+    // Memoize columns for performance
+    const usersColumns = useMemo(() => [
+        {
+            title: "Full Name",
+            key: "fullname",
+            render: (_, record) => `${record.firstName} ${record.lastName}`,
+        },
+        { title: "Username", dataIndex: "username" },
+        { title: "Email", dataIndex: "email" },
+        { title: "Role", dataIndex: "roles" },
+        {
+            title: "2FA", dataIndex: "twoFactorAuth",
+            render: (enabled, record) => (
+                <Switch
+                    checked={enabled}
+                    onChange={(checked) => {
+                        // Handle toggle change
+                        console.log("2FA for user", record.id, "is now", checked);
+                        // You can update state or call API here
+                    }}
+                />
+            ),
+        },
+        {
+            title: "Actions",
+            key: "action",
+            render: (_, record) => (
+                <Space size="middle">
+                    <Button
+                        onClick={() => alert("Edit user: " + record.id)}
+                        icon={<EditOutlined />}
+                    >
+                        Edit
+                    </Button>
+                    <Button
+                        danger
+                        onClick={() => alert("Delete user: " + record.id)}
+                        icon={<DeleteOutlined />}
+                    >
+                        Delete
+                    </Button>
+                </Space>
+            ),
+        },
+    ], []);
+
+    // Memoize paginated data for performance
+    const paginatedData = useMemo(() =>
+        data?.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+        [data, currentPage, pageSize]
+    );
+
+    if (paginatedData.length === 0) {
+        return (
+            <div className="flex justify-center items-center min-h-[60vh]">
+                <EmptyBox />
+            </div>
+        );
+    }
+    return (
+        <div className="flex flex-col gap-4 mx-2">
+            {/* --- Top Row: Search + Filters + Pagination --- */}
+            <div className="flex items-center justify-between">
+                <Input
+                    prefix={<SearchOutlined style={{ color: "#8C98A4" }} />}
+                    placeholder="Search"
+                    className="rounded-full border border-gray-200 px-4 py-2 text-gray-500 bg-white focus:shadow-none focus:border-blue-300 !w-64 !h-10"
+                />
+                <div className="flex items-center gap-3">
+                    <Select placeholder="Date added" className="!w-40 !h-10">
+                        <Select.Option value="recent">Recently Added</Select.Option>
+                        <Select.Option value="oldest">Oldest</Select.Option>
+                    </Select>
+                    <Select placeholder="Role" className="!w-40 !h-10">
+                        {/* Dynamically populate roles if needed */}
+                        {permissionData.map((role) => (
+                            <Select.Option key={role.key} value={role.key}>{role.label}</Select.Option>
+                        ))}
+                    </Select>
+                    <Button className="!w-10 !h-10" icon={<FunnelPlotOutlined className="!text-lg" />} onClick={() => setDrawerOpen(true)} />
+                    {isDrawerOpen && <FilterForm open={isDrawerOpen} onClose={() => setDrawerOpen(false)} />
+                    }
+                    <Pagination
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={data.length}
+                        onChange={(page, size) => {
+                            setCurrentPage(page);
+                            setPageSize(size);
+                        }}
+                        showSizeChanger
+                        size="large"
+                    />
+                </div>
+            </div>
+            {/* --- Table --- */}
+            <CustomTable
+                data={paginatedData}
+                rowKey="id"
+                columns={usersColumns}
+                pagination={false}
+                isRowSelectionEnabled={true}
+            />
+        </div>
+    );
+};
+
+export default UsersTable;

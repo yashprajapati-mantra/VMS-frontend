@@ -84,7 +84,7 @@ const Login = () => {
         {/* Submit */}
         <Form.Item>
           <Button
-            type="buttons"
+            type="button"
             size="large"
             className="primary_btn"
             htmlType="submit"

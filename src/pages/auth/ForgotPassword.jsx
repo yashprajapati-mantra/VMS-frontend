@@ -58,7 +58,7 @@ const ForgotPassword = () => {
             </Form.Item>
 
             <Button
-              type="buttons"
+              type="button"
               size="large"
               className="primary_btn"
               htmlType="submit"
@@ -107,7 +107,7 @@ const ForgotPassword = () => {
               </a>
             </div>
             <Button
-              type="buttons"
+              type="button"
               size="large"
               className="primary_btn"
               htmlType="submit"
@@ -203,7 +203,7 @@ const ForgotPassword = () => {
             </Form.Item>
 
             <Button
-              type="buttons"
+              type="button"
               size="large"
               className="primary_btn"
               htmlType="submit"
@@ -226,7 +226,7 @@ const ForgotPassword = () => {
             Password changed successfully
           </h2>
           <Button
-            type="buttons"
+            type="button"
             size="large"
             className="primary_btn"
             onClick={() => navigate("/")}
@@ -244,7 +244,7 @@ const ForgotPassword = () => {
           </div>
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Unexpected error occurred</h2>
           <Button
-            type="buttons"
+            type="button"
             size="large"
             className="primary_btn"
             onClick={() => setStep('email')}

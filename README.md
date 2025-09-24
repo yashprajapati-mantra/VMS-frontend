@@ -37,6 +37,11 @@ vms-frontend/
 ├─ vite.config.js
 └─ package.json
 
+🔑 Golden Rule:
+
+Shared/Reused UI → goes to components/.
+
+Page-specific UI → stays inside that page’s folder.
 
 
 ## 🛠 Installation & Setup  
