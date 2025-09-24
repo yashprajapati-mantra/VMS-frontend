@@ -4,10 +4,11 @@ import React from "react";
 import axios from "axios";
 
 import { useAuthStore } from "../store/authStore";
+import { API_ROUTES } from "../api/apiConfig";
 
 
 const loginApi = async ({ username, password }) => {
-    const response = await axios.post("http://192.168.8.235:5000/api/users/login", { username, password });
+    const response = await axios.post(`${API_ROUTES.AUTH.LOGIN}`, { username, password });
     return response.data;
 };
 
