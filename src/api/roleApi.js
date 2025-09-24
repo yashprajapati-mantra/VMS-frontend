@@ -1,5 +1,7 @@
+import axios from "axios";
+import { API_ROUTES } from "./apiConfig";
+
 export const fetchRolesAndPermissions = async () => {
-    const res = await fetch("https://dummyjson.com/posts");
-    if (!res.ok) throw new Error("Failed to fetch posts");
-    return res.json();
+    const response = await axios.get("https://dummyjson.com/posts");
+    return response.data;
 };

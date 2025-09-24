@@ -1,5 +1,7 @@
+import axios from "axios";
+import { API_ROUTES } from "./apiConfig";
+
 export async function fetchUsers() {
-  const res = await fetch('https://dummyjson.com/users');
-  if (!res.ok) throw new Error('Failed to fetch users');
-  return res.json();
+  const response = await axios.get(API_ROUTES.USER.GET_USERS);
+  return response.data;
 }

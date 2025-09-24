@@ -4,7 +4,7 @@ import Logo from "@/assets/images/Logo.png";
 import { monitorNavbarItems, navbarItems, roleItems } from "../../constants";
 import { useNavbarStore } from "../../store/navbarStore";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { DownOutlined } from "@ant-design/icons";
 
 export default function HeaderBar() {
@@ -14,15 +14,19 @@ export default function HeaderBar() {
 
     // Track current selected role
     const [selectedRole, setSelectedRole] = useState(roleItems[0].key); // default first item
-    // Dynamically pick menu items based on role
-    const currentMenuItems =
-        selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
+    // Dynamically pick menu items based on role, memoized
+    const currentMenuItems = useMemo(() => {
+        return selectedRole === "monitor" ? monitorNavbarItems : navbarItems;
+    }, [selectedRole]);
 
 
     useEffect(() => {
-        localStorage.setItem("selectedRole", selectedRole);
-        navigate("/dashboard"); // Redirect to dashboard on role change
-    }, [selectedRole])
+        const prevRole = localStorage.getItem("selectedRole");
+        if (prevRole !== selectedRole) {
+            localStorage.setItem("selectedRole", selectedRole);
+            navigate("/dashboard"); // Redirect to dashboard on role change
+        }
+    }, [selectedRole, navigate]);
 
     return (
         <Header
