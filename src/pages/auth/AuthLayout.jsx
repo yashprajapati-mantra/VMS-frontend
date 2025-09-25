@@ -1,25 +1,13 @@
-import React from "react";
-import LoginImage from "@/assets/images/LoginImage.jpg";
+import ImageMap from "../../utils/ImageLoader";
+
 const AuthLayout = ({ children }) => {
   return (
     <div className="h-screen max-h-screen p-2 flex">
       {/* Left Side - Camera / Branding */}
-      {/* <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-gray-900 relative">
-          <img
-            src="/vite.svg"
-            alt="Security Camera"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute bottom-6 flex flex-wrap justify-center gap-6 w-full px-6">
-            <img src="/vite.svg" alt="logo1" className="h-6 opacity-70" />
-            <img src="/vite.svg" alt="logo2" className="h-6 opacity-70" />
-            <img src="/vite.svg" alt="logo3" className="h-6 opacity-70" />
-            <img src="/vite.svg" alt="logo4" className="h-6 opacity-70" />
-          </div>
-        </div> */}
+
       <div className="w-1/2 relative overflow-hidden hidden md:flex">
         {/* Background Image Container */}
-        <img src={LoginImage} alt="Logo" className="w-full h-full object-cover rounded-xl" />
+        <img src={ImageMap["LoginImage.jpg"]} alt="Logo" className="w-full h-full object-cover rounded-xl" />
 
         {/* Bottom Logo Section */}
         <div className="absolute bottom-8 left-0 right-0 px-8">
