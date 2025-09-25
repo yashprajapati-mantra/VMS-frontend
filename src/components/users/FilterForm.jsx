@@ -1,5 +1,6 @@
 import { Button, Form, Input, Select, Switch, Tabs } from "antd";
 import CustomDrawer from "../comman/CustomDrawer";
+import { permissionData } from "../../constants";
 
 const { TabPane } = Tabs;
 
@@ -15,15 +16,15 @@ const FilterForm = ({ open, onClose }) => {
     return (
         <CustomDrawer open={open} onClose={onClose} title="Filters">
             <Form layout="vertical" form={form} onFinish={handleSubmit}>
-                <div className="grid grid-cols-2 gap-4">
-                    <Form.Item
-                        name="FullName"
-                        label="Full name"
-                        rules={[{ required: true, message: "Enter full name" }]}
-                    >
-                        <Input placeholder="Enter Full name" />
-                    </Form.Item>
-                </div>
+
+                <Form.Item
+                    name="FullName"
+                    label="Full name"
+                    rules={[{ required: true, message: "Enter full name" }]}
+                >
+                    <Input placeholder="Enter Full name" />
+                </Form.Item>
+
 
                 <Form.Item
                     name="username"
@@ -50,9 +51,9 @@ const FilterForm = ({ open, onClose }) => {
                     rules={[{ required: true, message: "Select a role" }]}
                 >
                     <Select placeholder="Select role">
-                        <Select.Option value="security">Security Analyst</Select.Option>
-                        <Select.Option value="technician">Technician</Select.Option>
-                        <Select.Option value="admin">Admin</Select.Option>
+                        {permissionData.map((role) => (
+                            <Select.Option key={role.key} value={role.key}>{role.label}</Select.Option>
+                        ))}
                     </Select>
                 </Form.Item>
 
