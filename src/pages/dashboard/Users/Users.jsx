@@ -21,7 +21,7 @@ const Users = () => {
     const users = useUserStore((state) => state.users);
 
     useEffect(() => {
-        if (usersRes) setUsers(usersRes);
+        if (usersRes) setUsers(usersRes.users);
     }, [usersRes, setUsers]);
 
 
