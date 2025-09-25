@@ -1,5 +1,5 @@
-import { DatePicker, Input, Pagination, Select, Button, Space, Switch } from "antd";
-import { FunnelPlotOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { FunnelPlotOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, DatePicker, Input, Pagination, Select } from "antd";
 import EmptyBox from "../../../assets/svg/EmptyBox";
 import CustomTable from "../../../components/comman/CustomTable";
 import FilterForm from "../../../components/users/FilterForm";
