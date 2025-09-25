@@ -7,11 +7,10 @@ import EnterLogoSvg from "../../assets/svg/enterLogoSvg";
 
 
 const Login = () => {
-  const { onFinish, isLoading, contextHolder } = useLoginController();
+  const { onFinish, isLoading } = useLoginController();
 
   return (
     <AuthLayout>
-      {contextHolder}
       {/* Logo */}
       <LoginSvg />
 
