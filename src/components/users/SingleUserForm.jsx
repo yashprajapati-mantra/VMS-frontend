@@ -1,4 +1,5 @@
 import { Form, Input, Select, Switch, Button } from "antd";
+import { permissionData } from "../../constants";
 
 const SingleUserForm = ({ form, onSubmit, onClose }) => (
     <Form layout="vertical" form={form} onFinish={onSubmit}>
@@ -41,9 +42,9 @@ const SingleUserForm = ({ form, onSubmit, onClose }) => (
             rules={[{ required: true, message: "Select a role" }]}
         >
             <Select placeholder="Select role">
-                <Select.Option value="security">Security Analyst</Select.Option>
-                <Select.Option value="technician">Technician</Select.Option>
-                <Select.Option value="admin">Admin</Select.Option>
+                {permissionData.map((role) => (
+                    <Select.Option key={role.key} value={role.key}>{role.label}</Select.Option>
+                ))}
             </Select>
         </Form.Item>
         <Form.Item name="enable2fa" label="Enable 2FA for this user" valuePropName="checked">
